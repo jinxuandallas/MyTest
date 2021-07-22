@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Map/53.jpg" type="Texture" id=2]
+
+[node name="53" type="Sprite"]
+texture = ExtResource( 2 )
+centered = false
