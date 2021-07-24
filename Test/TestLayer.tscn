@@ -1,0 +1,23 @@
+[gd_scene format=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 192.434
+margin_top = 231.634
+margin_right = 352.434
+margin_bottom = 315.634
+text = "yyyyyyyyyyy"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+margin_left = 296.377
+margin_top = 245.407
+margin_right = 438.377
+margin_bottom = 307.407
+text = "xxxxxxxxxxxxxx"
+__meta__ = {
+"_edit_use_anchors_": false
+}
