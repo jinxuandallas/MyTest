@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Node2D.gd" type="Script" id=1]
+[ext_resource path="res://fonts/FZLB_GBK.TTF" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 2 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="WriteButton" type="Button" parent="."]
+margin_left = 204.309
+margin_top = 363.037
+margin_right = 318.309
+margin_bottom = 426.037
+custom_fonts/font = SubResource( 1 )
+text = "写入"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReadButton" type="Button" parent="."]
+margin_left = 489.965
+margin_top = 364.372
+margin_right = 603.965
+margin_bottom = 427.372
+custom_fonts/font = SubResource( 1 )
+text = "读取"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 193.973
+margin_top = 56.2851
+margin_right = 598.973
+margin_bottom = 284.285
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="WriteButton" to="." method="_on_WriteButton_pressed"]
+[connection signal="pressed" from="ReadButton" to="." method="_on_ReadButton_pressed"]
