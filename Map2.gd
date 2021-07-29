@@ -32,9 +32,11 @@ func test():
 
 
 func _on_TextureRect_mouse_entered():
-	border.visible=true
+#	border.visible=true
+	border.show()
 	
 
 
 func _on_TextureRect_mouse_exited():
-	border.visible=false
+#	border.visible=false
+	border.hide()
