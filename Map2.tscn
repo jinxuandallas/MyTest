@@ -23,11 +23,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Camera2D" type="Camera2D" parent="TextureRect"]
+[node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 100, 320 )
 current = true
 smoothing_enabled = true
 script = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+margin_left = 501.449
+margin_top = 65.5159
+margin_right = 617.449
+margin_bottom = 150.516
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="mouse_entered" from="TextureRect" to="." method="_on_TextureRect_mouse_entered"]
 [connection signal="mouse_exited" from="TextureRect" to="." method="_on_TextureRect_mouse_exited"]
