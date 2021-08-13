@@ -26,8 +26,8 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=1440
-window/size/height=800
+window/size/width=1200
+window/size/height=700
 
 [gdnative]
 
