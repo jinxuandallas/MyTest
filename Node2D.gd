@@ -50,3 +50,11 @@ func read():
 #		print(data)
 
 	
+
+
+func _on_ColorRect_mouse_entered():
+	print("aaa")
+
+
+func _on_ColorRect_mouse_exited():
+	print("bbb")
