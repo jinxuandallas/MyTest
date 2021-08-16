@@ -40,6 +40,7 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxLayer/53"]
+visible = false
 margin_left = 243.677
 margin_top = 290.293
 margin_right = 293.677

@@ -7,6 +7,7 @@ extends Node2D
 const SPEED=200
 
 var in_edge
+var active_color_rect
 onready var background=$ParallaxBackground
 onready var margin_container=$MarginContainer
 onready var screen_size=get_viewport_rect().size
@@ -60,10 +61,16 @@ func _physics_process(delta):
 	if mouse_pos.y>screen_size.y- margin_container.get_constant("margin_bottom"):
 		background.scroll_offset.y-=delta*SPEED
 
+	if active_color_rect!=null:
+		if Input.is_action_pressed("0"):
+			active_color_rect.color=Color(1,1,1,0.7)
+		if Input.is_action_pressed("1"):
+			active_color_rect.color=Color(0.65,0.16,0.16,0.7)
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
+ 
 
 func _on_MarginContainer_mouse_entered():
 	in_edge=true
@@ -74,11 +81,17 @@ func _on_MarginContainer_mouse_exited():
 
 
 func _on_ColorRect_mouse_entered(color_rect):
-	color_rect.color.a=0.8
+	if color_rect.color.r==1&&color_rect.color.g==1&&color_rect.color.b==1:
+		color_rect.color.a=0.7
+	else:
+		color_rect.color==Color(1,1,1,0.7)
+	active_color_rect=color_rect
 #	color_rect.visible=true
 #	print("xxx")
 
 
 func _on_ColorRect_mouse_exited(color_rect):
-	color_rect.color.a=0
+	if color_rect.color.r==1&&color_rect.color.g==1&&color_rect.color.b==1:
+		color_rect.color.a=0
+	active_color_rect=null
 #	print("yyy")
