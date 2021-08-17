@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Map/53.jpg" type="Texture" id=1]
+[ext_resource path="res://viewport_background.gd" type="Script" id=2]
+
+[node name="Background" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -10
+scroll_limit_begin = Vector2( -200, 0 )
+scroll_limit_end = Vector2( 1200, 1100 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="53" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxLayer/53"]
+visible = false
+margin_left = 243.677
+margin_top = 290.293
+margin_right = 293.677
+margin_bottom = 340.293
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1200, 700 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Viewport"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1195.0
+margin_bottom = 695.0
+mouse_filter = 1
+custom_constants/margin_right = 50
+custom_constants/margin_top = 50
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Viewport/MarginContainer"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 1140.0
+margin_bottom = 640.0
+mouse_filter = 1
+
+[connection signal="mouse_entered" from="ParallaxBackground/ParallaxLayer/53/ColorRect" to="." method="_on_ColorRect_mouse_entered"]
+[connection signal="mouse_exited" from="ParallaxBackground/ParallaxLayer/53/ColorRect" to="." method="_on_ColorRect_mouse_exited"]
+[connection signal="mouse_entered" from="Viewport/MarginContainer" to="." method="_on_MarginContainer_mouse_entered"]
+[connection signal="mouse_exited" from="Viewport/MarginContainer" to="." method="_on_MarginContainer_mouse_exited"]

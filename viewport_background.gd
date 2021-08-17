@@ -47,8 +47,11 @@ func _ready():
 			
 			line_data.append(0)
 			
-		map_data.append_array(line_data)
+		map_data.append(line_data)
 		
+	print(map_data)
+	pass
+	
 func _input(event):
 	$Viewport.input(event)	
 
@@ -72,16 +75,29 @@ func _physics_process(delta):
 
 	if active_color_rect!=null:
 		if Input.is_action_pressed("0"):
-			active_color_rect.color=Color(1,1,1,0.7)
+			_handle_pressed(0)
+#			active_color_rect.color=Color(1,1,1,0.7)
 		if Input.is_action_pressed("1"):
-			var coordinate=_get_color_rect_num(active_color_rect)
-			print(coordinate)
-			active_color_rect.color=Color(0.65,0.16,0.16,0.7)
-		
+#			var coordinate=_get_color_rect_num(active_color_rect)
+#			map_data[coordinate.y][coordinate.x]=1
+#			print(coordinate)
+#			active_color_rect.color=_get_color(1)
+#			active_color_rect.color.a=0.6
+			_handle_pressed(1)
+			
+		if Input.is_action_pressed("2"):
+			_handle_pressed(2)	
+			
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-func _get_color_rect_num(color_rect:ColorRect):
+func _handle_pressed(key_type):		#处理按键后的逻辑
+	var coordinate=_get_color_rect_num(active_color_rect)
+	map_data[coordinate.y][coordinate.x]=key_type
+	active_color_rect.color=_get_color(key_type)
+	active_color_rect.color.a=0.6
+
+func _get_color_rect_num(color_rect:ColorRect):		#根据ColorRect对象判断其在map_data中的坐标
 	var x=color_rect.rect_position.x/50
 	var y=color_rect.rect_position.y/50
 	return Vector2(x,y)
@@ -96,7 +112,7 @@ func _on_MarginContainer_mouse_exited():
 
 func _on_ColorRect_mouse_entered(color_rect):
 #	if color_rect.color.r==1&&color_rect.color.g==1&&color_rect.color.b==1:
-	color_rect.color.a=0.7
+	color_rect.color=Color(1,1,1,0.6)
 #	else:
 #		color_rect.color==Color(1,1,1,0.7)
 	active_color_rect=color_rect
@@ -105,7 +121,26 @@ func _on_ColorRect_mouse_entered(color_rect):
 
 
 func _on_ColorRect_mouse_exited(color_rect):
-	if color_rect.color.r==1&&color_rect.color.g==1&&color_rect.color.b==1:
+#	if color_rect.color.r==1&&color_rect.color.g==1&&color_rect.color.b==1:
+#		color_rect.color.a=0
+	var coordinate=_get_color_rect_num(color_rect)
+	var type=map_data[coordinate.y][coordinate.x]
+	color_rect.color=_get_color(type)
+	if type==0:
 		color_rect.color.a=0
+	else:
+		color_rect.color.a=0.6
+		
 	active_color_rect=null
 #	print("yyy")
+
+func _get_color(type):		#根据不同类型返回相应颜色
+	var return_color
+	match type:
+		0:
+			return_color=Color(1,1,1)
+		1:
+			return_color=Color(0.65,0.16,0.16)
+		2:
+			return_color=Color.cornflower
+	return return_color
