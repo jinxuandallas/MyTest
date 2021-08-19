@@ -13,6 +13,14 @@ func _ready():
 	print("xxxx")
 	print(a)
 	print(b)
+	
+	print("xxx"+str(a))
+	
+	var d:Dictionary
+	d[str(a)]=[0,0,1,2]
+	d[22]=[1,3,4,5]
+	print(d)
+	print(to_json(d))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
