@@ -37,23 +37,29 @@ func _ready():
 #	print(namestr)
 #	var tt=get_node(namestr)
 #	tt.texture=preload("res://Map/53.jpg")
-	
+#	$Chunks/CanvasLayer/Rect.connect("ss",self,"_on_mouse",)
 	
 	for i in 9:
 		for j in 12:
 			var num= i * 12 + j
 			var res_str="res://Map/%d.jpg" %num
-			var sprite = Sprite.new()
-			sprite.texture=load(res_str)
-			sprite.centered = false
-			sprite.name="PartMap%d" %num
-			sprite.position = Vector2(j * 1000, i * 1000)
+			var texture_rect = MyTextureRect.new()
+			texture_rect.texture=load(res_str)
+#			texture_rect.centered = false
+			texture_rect.name="PartMap%d" %num
+#			texture_rect.position = Vector2(j * 1000, i * 1000)
+			texture_rect.margin_left=j*1000
+			texture_rect.margin_top=i*1000
+			texture_rect.connect("my_mouse_entered",self,"_on_MyTextureRect_mouse_entered")
 #			var l=Label.new()
 #			l.text=texture_rect.name
 #			texture_rect.add_child(l)
 #			if num>1:
 #				texture_rect.visible=false
-			_Chunks.add_child(sprite)
+#			texture_rect.mouse_filter=Control.MOUSE_FILTER_STOP
+#			$Chunks/CanvasLayer.add_child(texture_rect)
+			_Chunks.add_child(texture_rect)
+
 			#$ParallaxBackground/ParallaxLayer.add_child(texture_rect)
 #			print("(%d,%d)" %[i,j])
 
@@ -119,5 +125,11 @@ func move_camera(position_offset : Vector2):
 func set_zoom(new_zoom):
 	zoom = clamp(new_zoom, MIN_ZOOM, MAX_ZOOM)
 	
-#func _zoom_get():
-#	return zoom
+func _on_MyTextureRect_mouse_entered(my_texture_rect):
+	print(my_texture_rect.name)
+
+
+
+
+func _on_ColorRect_mouse_entered():
+	print("xxx")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=110 format=2]
 
-[ext_resource path="res://ManualBigMap.gd" type="Script" id=1]
+[ext_resource path="res://old/ManualBigMap.gd" type="Script" id=1]
 [ext_resource path="res://Map/0.jpg" type="Texture" id=2]
 [ext_resource path="res://Map/2.jpg" type="Texture" id=3]
 [ext_resource path="res://Map/3.jpg" type="Texture" id=4]

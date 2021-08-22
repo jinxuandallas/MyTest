@@ -23,6 +23,8 @@ func _ready():
 	print(to_json(d))
 	
 	print (Vector2(2000,1000).angle())
+	print(get_viewport().size)
+	print(get_viewport_rect().size)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
