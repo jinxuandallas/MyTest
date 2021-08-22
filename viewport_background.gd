@@ -102,7 +102,7 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_cancel"):
 		$WindowDialog.popup()
 		_save_map()
-	
+		
 	if active_color_rect!=null:
 		if Input.is_action_pressed("0"):
 			_handle_pressed(0)

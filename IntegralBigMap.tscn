@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/丝路地图全.jpg-a06e3a5aa739f4d1a0a30e161605a07b.stex"
+
+[node name="ManualBigMap" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_limit_begin = Vector2( -500, 0 )
+scroll_limit_end = Vector2( 13000, 10000 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 1200, 700 )
+
+[node name="MarginContainer" type="MarginContainer" parent="Viewport"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1195.0
+margin_bottom = 695.0
+mouse_filter = 1
+custom_constants/margin_right = 50
+custom_constants/margin_top = 50
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Viewport/MarginContainer"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 1140.0
+margin_bottom = 640.0
+mouse_filter = 1
+
+[connection signal="mouse_entered" from="Viewport/MarginContainer" to="." method="_on_MarginContainer_mouse_entered"]
+[connection signal="mouse_exited" from="Viewport/MarginContainer" to="." method="_on_MarginContainer_mouse_exited"]

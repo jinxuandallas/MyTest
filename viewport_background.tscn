@@ -158,7 +158,6 @@ margin_right = 95.0
 margin_bottom = 266.0
 
 [node name="53" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( -5.66321, -16.9897 )
 texture = ExtResource( 1 )
 centered = false
 

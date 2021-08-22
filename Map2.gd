@@ -11,6 +11,9 @@ onready var border=$ReferenceRect
 func _ready():
 #	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
 	test()
+	var l=Label.new()
+	l.text="texture_rect"
+	map.add_child(l)
 
 func test():
 	

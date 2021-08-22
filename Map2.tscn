@@ -23,6 +23,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="TextureRect"]
+margin_left = 206.362
+margin_top = 215.887
+margin_right = 246.362
+margin_bottom = 229.887
+text = "sfsfsffsf
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 smoothing_enabled = true

@@ -21,6 +21,8 @@ func _ready():
 	d[22]=[1,3,4,5]
 	print(d)
 	print(to_json(d))
+	
+	print (Vector2(2000,1000).angle())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
