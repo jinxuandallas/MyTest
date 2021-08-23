@@ -85,7 +85,7 @@ func _physics_process(delta):
 	if in_edge:
 		var mouse_pos=get_viewport().get_mouse_position()
 #	if mouse_pos.x>screen_size.x-margin_container.get_constant("margin_right")||mouse_pos.x<margin_container.get_constant("margin_left")||mouse_pos.y<margin_container.get_constant("margin_top")||mouse_pos.y>screen_size.y- margin_container.get_constant("margin_bottom"):
-	
+		find_node()
 #		print(mouse_pos)
 		if mouse_pos.x>screen_size.x-margin_container.get_constant("margin_right"):
 			background.scroll_offset.x+=delta*SPEED

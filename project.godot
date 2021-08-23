@@ -14,20 +14,20 @@ _global_script_classes=[ {
 "language": "NativeScript",
 "path": "res://git_api.gdns"
 }, {
-"base": "Node2D",
-"class": "MyArea2DClass",
-"language": "GDScript",
-"path": "res://test_node2d/MyArea2D.gd"
-}, {
 "base": "TextureRect",
 "class": "MyTextureRect",
 "language": "GDScript",
 "path": "res://my_texture_rect.gd"
+}, {
+"base": "Node2D",
+"class": "MyTileMap",
+"language": "GDScript",
+"path": "res://test_node2d/MyArea2D.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
-"MyArea2DClass": "",
-"MyTextureRect": ""
+"MyTextureRect": "",
+"MyTileMap": ""
 }
 
 [application]

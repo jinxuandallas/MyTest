@@ -14,17 +14,10 @@ limit_smoothed = true
 smoothing_enabled = true
 
 [node name="Chunks" type="Node2D" parent="."]
+z_index = 10
 
-[node name="ColorRect" type="ColorRect" parent="Chunks"]
-margin_left = 200.0
-margin_top = 200.0
-margin_right = 411.0
-margin_bottom = 370.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LayerGUI" type="CanvasLayer" parent="."]
+[node name="LayerGUI" type="Viewport" parent="."]
+size = Vector2( 1200, 700 )
 
 [node name="ControlDetectMouse" type="Control" parent="LayerGUI"]
 anchor_right = 1.0
@@ -38,7 +31,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 3.1748
 margin_bottom = 3.1748
-mouse_filter = 2
 custom_constants/margin_right = 100
 custom_constants/margin_top = 100
 custom_constants/margin_left = 100
@@ -53,5 +45,3 @@ margin_top = 100.0
 margin_right = 1100.0
 margin_bottom = 600.0
 mouse_filter = 2
-
-[connection signal="mouse_entered" from="Chunks/ColorRect" to="." method="_on_ColorRect_mouse_entered"]

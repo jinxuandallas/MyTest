@@ -13,3 +13,7 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Map" type="Sprite" parent="Area2D/CollisionShape2D"]
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
+[connection signal="texture_changed" from="Area2D/CollisionShape2D/Map" to="." method="_on_Map_texture_changed"]
