@@ -8,12 +8,13 @@ var in_edge
 var zoom = 1 setget set_zoom
 var MAX_ZOOM := 8.0
 var MIN_ZOOM := 1
-var ZOOM_PERIOD := 0.05
+var ZOOM_PERIOD := 0.25
 
 var MAP_SIZE_X = 12 * 1000
 var MAP_SIZE_Y = 9 * 1000
 
 var mouse_position := Vector2()
+var current_border
 
 onready var _Camera2D = $Camera2D
 onready var _Chunks = $Chunks
@@ -44,6 +45,8 @@ func _ready():
 	for i in 9:
 		for j in 12:
 			var num = i * 12 + j
+			
+			
 			var res_str = "res://Map/%d.jpg" % num
 
 			var texture_rect = MyTextureRect.new()
@@ -54,7 +57,23 @@ func _ready():
 			texture_rect.margin_left=j*1000
 			texture_rect.margin_top=i*1000
 			texture_rect.connect("my_mouse_entered",self,"_on_MyTextureRect_mouse_entered")
+			
+#			var reference_rect=ReferenceRect.new()
+			
+#			reference_rect.rect_position.x=texture_rect.margin_left
+#			reference_rect.rect_position.y=texture_rect.margin_top
+#			reference_rect.rect_size.x=996
+#			reference_rect.rect_size.y=996
+#			reference_rect.border_color=Color.red
+#			reference_rect.border_width=2
+#			reference_rect.name="Border%d"%num
+#			reference_rect.editor_only=false
+#			reference_rect.visible=true
+#
+#			_Chunks.add_child(reference_rect)
 			_Chunks.add_child(texture_rect)
+			
+			
 #			var my_area2d: MyTileMap = load("res://test_node2d/MyArea2D.tscn").instance()
 #			_Chunks.add_child(my_area2d)
 #			my_area2d.map.name = "PartMap%d" % num
@@ -123,11 +142,15 @@ func _process(delta):
 	if Input.is_action_just_released("ScrollUp"):
 		set_zoom(zoom - ZOOM_PERIOD)
 		_Camera2D.zoom = Vector2(zoom, zoom)
+		if(zoom<4):
+			current_border.width=8
 		move_camera(Vector2())
 #		print(self.zoom)
 	if Input.is_action_just_released("ScrollDown"):
 		set_zoom(zoom + ZOOM_PERIOD)
 		_Camera2D.zoom = Vector2(zoom, zoom)
+		if(zoom>4):
+			current_border.width=18
 		move_camera(Vector2())
 
 
@@ -146,9 +169,22 @@ func set_zoom(new_zoom):
 	zoom = clamp(new_zoom, MIN_ZOOM, MAX_ZOOM)
 
 
-func _on_MyTextureRect_mouse_entered(my_texture_rect):
-	print(my_texture_rect.name)
+func _on_MyTextureRect_mouse_entered(my_texture_rect:MyTextureRect):
+#	var num=my_texture_rect.name.trim_prefix("PartMap")
+#	var border:ReferenceRect= get_node("Chunks/Border"+num)
+#	border.visible=true
+#	print("yyy")
+	if current_border != null:
+		current_border.queue_free()
+	current_border=Line2D.new()
+	current_border.width=8 if zoom<4 else 18
+	print(current_border.width)
+	current_border.default_color=Color.red
+	current_border.add_point(Vector2(my_texture_rect.rect_position.x,my_texture_rect.rect_position.y))
+	current_border.add_point(Vector2(my_texture_rect.rect_position.x+my_texture_rect.rect_size.x,my_texture_rect.rect_position.y))
+	current_border.add_point(Vector2(my_texture_rect.rect_position.x+my_texture_rect.rect_size.x,my_texture_rect.rect_position.y+my_texture_rect.rect_size.y))
+	current_border.add_point(Vector2(my_texture_rect.rect_position.x,my_texture_rect.rect_position.y+my_texture_rect.rect_size.y))
+	current_border.add_point(Vector2(my_texture_rect.rect_position.x,my_texture_rect.rect_position.y))
+#	current_border.z_index=10
+	_Chunks.add_child(current_border)
 
-
-func _on_ColorRect_mouse_entered():
-	print("xxx")
