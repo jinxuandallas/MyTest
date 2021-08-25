@@ -1,5 +1,5 @@
 extends Node2D
-
+class_name MapEditor
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -9,6 +9,7 @@ const SPEED=200
 var in_edge
 var active_color_rect
 var map_data=[]
+#var num
 
 onready var background=$ParallaxBackground
 onready var margin_container=$"Viewport/MarginContainer"
@@ -24,6 +25,8 @@ func _ready():
 		l.default_color=Color.red
 		l.width=2
 		map.add_child(l)
+		
+	print(get_tree().get_meta("MapNum"))
 		
 	for i in 21:
 		var l=Line2D.new()

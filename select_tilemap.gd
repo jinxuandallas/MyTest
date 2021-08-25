@@ -15,6 +15,8 @@ var MAP_SIZE_Y = 9 * 1000
 
 var mouse_position := Vector2()
 var current_border
+var map_state=[]
+var current_map_num
 
 onready var _Camera2D = $Camera2D
 onready var _Chunks = $Chunks
@@ -42,6 +44,8 @@ func _ready():
 #	tt.texture=preload("res://Map/53.jpg")
 #	$Chunks/CanvasLayer/Rect.connect("ss",self,"_on_mouse",)
 
+	
+			
 	for i in 9:
 		for j in 12:
 			var num = i * 12 + j
@@ -73,7 +77,8 @@ func _ready():
 #			_Chunks.add_child(reference_rect)
 			_Chunks.add_child(texture_rect)
 			
-			
+	_load_mapstate()
+#	_format_mapstate()
 #			var my_area2d: MyTileMap = load("res://test_node2d/MyArea2D.tscn").instance()
 #			_Chunks.add_child(my_area2d)
 #			my_area2d.map.name = "PartMap%d" % num
@@ -92,7 +97,6 @@ func _ready():
 
 			#$ParallaxBackground/ParallaxLayer.add_child(texture_rect)
 
-
 #			print("(%d,%d)" %[i,j])
 
 
@@ -100,6 +104,26 @@ func _input(event):
 	if event is InputEventMouse:
 		mouse_position = event.position
 		in_edge = ! _DetectMouseRect.get_rect().has_point(mouse_position)
+		if event is InputEventMouseButton:
+			if event.button_index==BUTTON_WHEEL_UP:
+				set_zoom(zoom - ZOOM_PERIOD)
+				_Camera2D.zoom = Vector2(zoom, zoom)
+				if(zoom<4):
+					current_border.width=8 #随着地图缩放，调节线段宽度
+				move_camera(Vector2())
+			
+			if event.button_index==BUTTON_WHEEL_DOWN:
+				set_zoom(zoom + ZOOM_PERIOD)
+				_Camera2D.zoom = Vector2(zoom, zoom)
+				if(zoom>4):
+					current_border.width=18 #随着地图缩放，调节线段宽度
+				move_camera(Vector2())
+				
+			if event.button_index==BUTTON_LEFT:
+#					var editor:PackedScene =load("res://viewport_background.tscn")
+					get_tree().set_meta("MapNum",current_map_num)
+#					get_tree().change_scene_to(editor)
+					get_tree().change_scene("res://viewport_background.tscn")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -139,19 +163,19 @@ func _process(delta):
 				camera_translation.y = delta * SPEED * zoom
 		move_camera(camera_translation)
 
-	if Input.is_action_just_released("ScrollUp"):
-		set_zoom(zoom - ZOOM_PERIOD)
-		_Camera2D.zoom = Vector2(zoom, zoom)
-		if(zoom<4):
-			current_border.width=8
-		move_camera(Vector2())
-#		print(self.zoom)
-	if Input.is_action_just_released("ScrollDown"):
-		set_zoom(zoom + ZOOM_PERIOD)
-		_Camera2D.zoom = Vector2(zoom, zoom)
-		if(zoom>4):
-			current_border.width=18
-		move_camera(Vector2())
+#	if Input.is_action_just_released("ScrollUp"):
+#		set_zoom(zoom - ZOOM_PERIOD)
+#		_Camera2D.zoom = Vector2(zoom, zoom)
+#		if(zoom<4):
+#			current_border.width=8 #随着地图缩放，调节线段宽度
+#		move_camera(Vector2())
+##		print(self.zoom)
+#	if Input.is_action_just_released("ScrollDown"):
+#		set_zoom(zoom + ZOOM_PERIOD)
+#		_Camera2D.zoom = Vector2(zoom, zoom)
+#		if(zoom>4):
+#			current_border.width=18 #随着地图缩放，调节线段宽度
+#		move_camera(Vector2())
 
 
 func move_camera(position_offset: Vector2):
@@ -177,8 +201,8 @@ func _on_MyTextureRect_mouse_entered(my_texture_rect:MyTextureRect):
 	if current_border != null:
 		current_border.queue_free()
 	current_border=Line2D.new()
-	current_border.width=8 if zoom<4 else 18
-	print(current_border.width)
+	current_border.width=8 if zoom<4 else 18 #随着地图缩放，调节线段宽度
+#	print(current_border.width)
 	current_border.default_color=Color.red
 	current_border.add_point(Vector2(my_texture_rect.rect_position.x,my_texture_rect.rect_position.y))
 	current_border.add_point(Vector2(my_texture_rect.rect_position.x+my_texture_rect.rect_size.x,my_texture_rect.rect_position.y))
@@ -187,4 +211,47 @@ func _on_MyTextureRect_mouse_entered(my_texture_rect:MyTextureRect):
 	current_border.add_point(Vector2(my_texture_rect.rect_position.x,my_texture_rect.rect_position.y))
 #	current_border.z_index=10
 	_Chunks.add_child(current_border)
+	current_map_num=my_texture_rect.name.trim_prefix("PartMap")
+	
 
+func _load_mapstate():
+	var file=File.new()
+	if not file.file_exists("res://Json/map_state.json"):
+		print("文件不存在")
+		_format_mapstate()
+		return
+		
+	file.open("res://Json/map_state.json",File.READ)
+#	var line=[]
+#	while file.get_position()<file.get_len():
+	var map_json=parse_json(file.get_as_text())
+#	print(map_json)
+
+	if map_json.size()>0:
+		map_state.clear()
+		
+		for i in map_json["MapState"]:
+			map_state.append(i as int)
+			if i as int ==1:
+#				print("Chunks/PartMap%d"%(map_state.size()-1))
+				get_node("Chunks/PartMap%d"%(map_state.size()-1)).modulate=Color.green
+#				$Chunks/TextureRect.modulate=Color.green
+#			print(i)
+#		print(map_state)	
+	else:
+		_format_mapstate()
+#	var data=parse_json(file.g())
+#		data[str(l)]
+#		label.text+="name:%s\n"%data["name"]
+#		label.text+="value:%s\n"%data["value"]
+#		label.text+="age:%d\n"%data["age"]
+#		print(data)
+func _format_mapstate():
+	map_state.clear()
+	for i in 108:
+		map_state.append(0)
+	var save_file=File.new()
+	var state={"MapState":map_state}
+	save_file.open("res://Json/map_state.json",File.WRITE)
+	save_file.store_string(JSON.print(state,"\t"))
+	save_file.close()
