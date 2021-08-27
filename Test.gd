@@ -25,8 +25,29 @@ func _ready():
 	print (Vector2(2000,1000).angle())
 	print(get_viewport().size)
 	print(get_viewport_rect().size)
+	$ConfirmationDialog.get_cancel().connect("pressed",self,"_cancelled")
 
-
+func _input(event):
+	if event is InputEventKey:
+		if event.scancode==KEY_ESCAPE:
+			$ConfirmationDialog.popup()
+			print("66666")
+#	if Input.is_key_pressed(KEY_ESCAPE):
+#		$ConfirmationDialog.popup()
+#		print("66666")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+#func _physics_process(delta):
+#	if Input.is_key_pressed(KEY_ESCAPE):
+#		$ConfirmationDialog.popup()
+
+func _on_Button_pressed():
+	$ConfirmationDialog.popup()
+
+func _cancelled():
+	print("xxxxx")
+
+
+func _on_ConfirmationDialog_confirmed():
+	print("aaaaa")
