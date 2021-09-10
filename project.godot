@@ -17,12 +17,12 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "MapEditor",
 "language": "GDScript",
-"path": "res://viewport_background.gd"
+"path": "res://old/viewport_background.gd"
 }, {
-"base": "TextureRect",
+"base": "Reference",
 "class": "MyTextureRect",
 "language": "GDScript",
-"path": "res://my_texture_rect.gd"
+"path": "res://old/my_texture_rect.gd"
 }, {
 "base": "Node2D",
 "class": "MyTileMap",
@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="MyTest"
-run/main_scene="res://viewport_background.tscn"
+run/main_scene="res://old/viewport_background.tscn"
 config/icon="res://icon.png"
 
 [display]

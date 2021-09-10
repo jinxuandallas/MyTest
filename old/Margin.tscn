@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Map/53.jpg" type="Texture" id=1]
-[ext_resource path="res://Margin.gd" type="Script" id=2]
-[ext_resource path="res://MarginCamera2D.gd" type="Script" id=3]
+[ext_resource path="res://old/Margin.gd" type="Script" id=2]
+[ext_resource path="res://old/MarginCamera2D.gd" type="Script" id=3]
+
 
 [node name="Margin" type="Node2D"]
 script = ExtResource( 2 )

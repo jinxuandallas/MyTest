@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Map.gd" type="Script" id=1]
+[ext_resource path="res://old/Map.gd" type="Script" id=1]
 [ext_resource path="res://Map/53.jpg" type="Texture" id=2]
+
 
 [node name="53" type="TextureRect"]
 margin_top = -2.82843
