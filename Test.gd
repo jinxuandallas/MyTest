@@ -1,6 +1,5 @@
 extends Node2D
 
-
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -26,7 +25,7 @@ func _ready():
 	print(get_viewport().size)
 	print(get_viewport_rect().size)
 	$ConfirmationDialog.get_cancel().connect("pressed",self,"_cancelled")
-
+	$Button2.connect("pressed",self,"_on_Button2_pressed",["xxx"])
 func _input(event):
 	if event is InputEventKey:
 		if event.scancode==KEY_ESCAPE:
@@ -51,3 +50,7 @@ func _cancelled():
 
 func _on_ConfirmationDialog_confirmed():
 	print("aaaaa")
+
+
+func _on_Button2_pressed(para):
+	print(para)

@@ -246,6 +246,8 @@ func _load_mapstate():
 #		label.text+="value:%s\n"%data["value"]
 #		label.text+="age:%d\n"%data["age"]
 #		print(data)
+	file.close()
+
 func _format_mapstate():
 	map_state.clear()
 	for i in 108:

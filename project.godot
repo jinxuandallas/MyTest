@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://old/viewport_background.gd"
 }, {
-"base": "Reference",
+"base": "TextureRect",
 "class": "MyTextureRect",
 "language": "GDScript",
 "path": "res://old/my_texture_rect.gd"
